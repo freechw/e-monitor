@@ -1,6 +1,13 @@
 
 #include <stdlib.h>
+
+#if defined(EPD2IN9)
 #include "epd2in9.h"
+#endif
+#if defined(EPD2IN9V2)
+#include "epd2in9v2.h"
+#endif
+
 #include "epdpaint.h"
 #include "epdtest.h"
 #include "imagedata.h"

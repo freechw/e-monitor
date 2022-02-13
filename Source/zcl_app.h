@@ -19,14 +19,12 @@ extern "C" {
 // Application Events
 #define APP_REPORT_EVT                  0x0001
 #define APP_READ_SENSORS_EVT            0x0002
-//#define APP_REPORT_LDR_EVT              0x0004
 #define APP_REPORT_CLOCK_EVT            0x0004
 #define APP_MOTION_ON_EVT               0x0008
-#define APP_EPD_SLEEP_EVT               0x0010   
+//#define APP_EPD_SLEEP_EVT               0x0010   
 #define APP_MOTION_OFF_EVT              0x0020
 #define APP_MOTION_DELAY_EVT            0x0040
 #define APP_SAVE_ATTRS_EVT              0x0080
-//#define APP_CONTACT_DELAY_EVT           0x0100
 #define APP_EPD_DELAY_EVT               0x0100
 #define APP_BH1750_DELAY_EVT            0x0200
 #define APP_REPORT_TEMPERATURE_EVT      0x0400
@@ -57,14 +55,15 @@ extern "C" {
 #define BASIC              ZCL_CLUSTER_ID_GEN_BASIC
 #define ONOFF              ZCL_CLUSTER_ID_GEN_ON_OFF
 #define POWER_CFG          ZCL_CLUSTER_ID_GEN_POWER_CFG
-//#define BINARY_INPUT       ZCL_CLUSTER_ID_GEN_BINARY_INPUT_BASIC
 #define TEMP               ZCL_CLUSTER_ID_MS_TEMPERATURE_MEASUREMENT
 #define HUMIDITY           ZCL_CLUSTER_ID_MS_RELATIVE_HUMIDITY
-#define SOIL_HUMIDITY      0x0408
+//#define SOIL_HUMIDITY      0x0408
 #define PRESSURE           ZCL_CLUSTER_ID_MS_PRESSURE_MEASUREMENT
 #define ILLUMINANCE        ZCL_CLUSTER_ID_MS_ILLUMINANCE_MEASUREMENT
-#define ILLUMINANCE_CONFIG ZCL_CLUSTER_ID_MS_ILLUMINANCE_LEVEL_SENSING_CONFIG
+//#define ILLUMINANCE_CONFIG ZCL_CLUSTER_ID_MS_ILLUMINANCE_LEVEL_SENSING_CONFIG
 #define OCCUPANCY          ZCL_CLUSTER_ID_MS_OCCUPANCY_SENSING
+#define GEN_TIME           ZCL_CLUSTER_ID_GEN_TIME
+#define HVAC_UI_CONFIG     ZCL_CLUSTER_ID_HVAC_USER_INTERFACE_CONFIG
 
 #define ZCL_BOOLEAN   ZCL_DATATYPE_BOOLEAN
 #define ZCL_UINT8     ZCL_DATATYPE_UINT8
@@ -76,6 +75,7 @@ extern "C" {
 #define ZCL_ENUM8     ZCL_DATATYPE_ENUM8
 #define ZCL_UNKNOWN   ZCL_DATATYPE_UNKNOWN
 #define ZCL_CHARSTR   ZCL_DATATYPE_CHAR_STR
+#define ZCL_UTC       ZCL_DATATYPE_UTC
 
 #define ATTRID_TEMPERATURE_MIN_ABSOLUTE_CHANGE 0xF001
 #define ATTRID_TEMPERATURE_PERIOD 0xF002
@@ -87,6 +87,7 @@ extern "C" {
 #define ATTRID_ILLUMINANCE_MIN_ABSOLUTE_CHANGE 0xF001
 #define ATTRID_ILLUMINANCE_PERIOD 0xF002
 #define ATTRID_POWER_CFG_BATTERY_PERIOD 0xF003
+#define ATTRID_HVAC_THERMOSTAT_UI_CONFIG_DISPLAY_MODE 0xF004
   
 //#define ATTRID_GEN_BINARY_INPUT_PRESENTVALUE 0x55
 
@@ -107,7 +108,7 @@ extern SimpleDescriptionFormat_t zclApp_FourthEP;
 
 extern uint8 zclApp_BatteryVoltage;
 extern uint8 zclApp_BatteryPercentageRemainig;
-extern uint16 zclApp_BatteryVoltageRawAdc;
+//extern uint16 zclApp_BatteryVoltageRawAdc;
 extern int16 zclApp_Temperature_Sensor_MeasuredValue;
 extern int16 zclApp_PressureSensor_MeasuredValue;
 extern int16 zclApp_PressureSensor_ScaledValue;
@@ -116,9 +117,10 @@ extern uint16 zclApp_HumiditySensor_MeasuredValue;
 //extern int16 zclApp_DS18B20_MeasuredValue;
 //extern uint16 zclApp_SoilHumiditySensor_MeasuredValue;
 //extern uint16 zclApp_SoilHumiditySensor_MeasuredValueRawAdc;
-extern uint16 zclApp_IlluminanceSensor_MeasuredValue;
-extern uint16 zclApp_IlluminanceSensor_MeasuredValueRawAdc;
+//extern uint16 zclApp_IlluminanceSensor_MeasuredValue;
+//extern uint16 zclApp_IlluminanceSensor_MeasuredValueRawAdc;
 extern uint16 zclApp_bh1750IlluminanceSensor_MeasuredValue;
+extern uint32 zclApp_GenTime_TimeUTC;
 
 //extern uint8 zclApp_Magnet_OnOff;
 //extern uint8 zclApp_Magnet;
@@ -143,6 +145,8 @@ typedef struct
     uint16 MsHumidityPeriod;
     uint16 MsIlluminancePeriod;
     uint16 CfgBatteryPeriod;
+//    bool HvacUiDisplayMode;
+    uint8 HvacUiDisplayMode;
 }  application_config_t;
 
 extern application_config_t zclApp_Config;
@@ -162,7 +166,7 @@ extern const uint8 zclApp_ManufacturerName[];
 extern const uint8 zclApp_ModelId[];
 extern const uint8 zclApp_PowerSource;
 
-extern uint8 zclApp_BatteryManu[];
+//extern uint8 zclApp_BatteryManu[];
 
 // APP_TODO: Declare application specific attributes here
 

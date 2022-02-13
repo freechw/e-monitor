@@ -9,4 +9,7 @@
 2. Go to step 1 for FN device
 
 # Hardware
-![](/images/epd29.jpg)
+![](/images/photo_2022-01-13_22-06-46.jpg)
+![](/images/photo_2022-01-13_22-07-14.jpg)
+![](/images/photo_2022-01-13_22-07-31.jpg)
+![](/images/epd3in7_1.jpg)

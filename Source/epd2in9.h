@@ -1,8 +1,6 @@
 #ifndef EPD2IN9_H
 #define EPD2IN9_H
 
-//#include "epdif.h"
-
 // Display resolution
 #define EPD_WIDTH       128
 #define EPD_HEIGHT      296
@@ -36,24 +34,33 @@ extern const unsigned char lut_partial_update[];
 extern    unsigned long epd_width;
 extern    unsigned long epd_height;
 
-extern    int  EpdInit(const unsigned char* lut);
+void EpdInit(void);
+extern    void EpdInitFull(void);
+extern    void EpdInitPartial(void);
+
 extern    void EpdSendCommand(unsigned char command);
 extern    void EpdSendData(unsigned char data);
 extern    void WaitUntilIdle(void);
 extern    void EpdReset(void);
 
 extern    void EpdSetFrameMemoryXY(const unsigned char* image_buffer,int x, int y, int image_width, int image_height);
+extern    void EpdSetFrameMemoryImageXY(const unsigned char* image_buffer, int x, int y, int image_width, int image_height, uint8 invert);
 
 extern    void EpdSetFrameMemory(const unsigned char* image_buffer);
+extern    void EpdSetFrameMemoryBase(const unsigned char* image_buffer, uint8 invert);
+
 extern    void EpdClearFrameMemory(unsigned char color);
+
 extern    void EpdDisplayFrame(void);
+extern    void EpdDisplayFramePartial(void);
+
 extern    void EpdSleep(void);
 
 extern    void EpdSetLut(const unsigned char* lut);
 extern    void EpdSetMemoryArea(int x_start, int y_start, int x_end, int y_end);
 extern    void EpdSetMemoryPointer(int x, int y);
 
-extern    void DelayMs(unsigned int delaytime);
+//void DelayMs(unsigned int delaytime);
 
 #endif /* EPD2IN9_H */
 

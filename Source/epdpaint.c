@@ -2,12 +2,15 @@
 //#include <avr/pgmspace.h>
 #include "epdpaint.h"
 
+unsigned char image[768];
 unsigned char* pimage;
-int pwidth ;
-int pheight ;
-int protate ;
+int pwidth;
+int pheight;
+int protate;
+int pinvert;
 
 void PaintPaint(unsigned char* image, int width, int height) {
+    pinvert = IF_INVERT_COLOR;
     protate = ROTATE_0;
     pimage = image;
     /* 1 byte = 8 pixels, so the width should be the multiple of 8 */
@@ -51,6 +54,24 @@ void PaintDrawStringAt(int x, int y, const char* text, sFONT* font, int colored)
         counter++;
     }
 }
+
+void PaintDrawImage(const unsigned char* imgData, int x, int y, int Width, int Height, int colored) {
+  int i, j;
+  const unsigned char* prt = imgData;
+    for (j = 0; j < Height; j++) {
+        for (i = 0; i < Width; i++) {
+          if (* prt & (0x80 >> (i % 8))){
+            PaintDrawPixel(x + i, y + j, colored);            
+          }
+          if (i % 8 == 7) {
+            prt++;
+          }
+        }
+        if (Width % 8 != 0) {
+          prt++;
+        }
+    }
+}
         
 void PaintDrawCharAt(int x, int y, char ascii_char, sFONT* font, int colored) {
     int i, j;
@@ -86,14 +107,14 @@ void PaintDrawPixel(int x, int y, int colored) {
         point_temp = x;
         x = pwidth - y;
         y = point_temp;
-        PaintDrawAbsolutePixel(x, y, colored);
+        PaintDrawAbsolutePixel(x-1, y, colored);
     } else if (protate == ROTATE_180) {
         if(x < 0 || x >= pwidth || y < 0 || y >= pheight) {
           return;
         }
         x = pwidth - x;
         y = pheight - y;
-        PaintDrawAbsolutePixel(x, y, colored);
+        PaintDrawAbsolutePixel(x-1, y-1, colored);
     } else if (protate == ROTATE_270) {
         if(x < 0 || x >= pheight || y < 0 || y >= pwidth) {
           return;
@@ -101,15 +122,20 @@ void PaintDrawPixel(int x, int y, int colored) {
         point_temp = x;
         x = y;
         y = pheight - point_temp;
-        PaintDrawAbsolutePixel(x, y, colored);
+        PaintDrawAbsolutePixel(x, y-1, colored);
     }
+}
+
+void PaintSetInvert(int invert) {
+  pinvert = invert;
 }
 
 void PaintDrawAbsolutePixel(int x, int y, int colored) {
     if (x < 0 || x >= pwidth || y < 0 || y >= pheight) {
         return;
     }
-    if (IF_INVERT_COLOR) {
+//    if (IF_INVERT_COLOR) {
+    if (pinvert) {
         if (colored) {
             pimage[(x + y * pwidth) / 8] |= 0x80 >> (x % 8);
         } else {

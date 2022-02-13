@@ -24,7 +24,6 @@
 #define BDB_FINDING_BINDING_CAPABILITY_ENABLED 1
 #define BDB_REPORTING TRUE
 
-
 #define ISR_KEYINTERRUPT
 #define HAL_BUZZER FALSE
 
@@ -32,12 +31,20 @@
 #define HAL_I2C TRUE
 #define BLINK_LEDS TRUE
 
+#define LQI_REQ
+#if defined(LQI_REQ)
+#define MT_TASK
+#define MT_SYS_FUNC
+#define MT_ZDO_FUNC
+#define MT_ZDO_MGMT
+#define INT_HEAP_LEN (2688)
+#endif
 
 //one of this boards
-// #define HAL_BOARD_MOTION
+// #define HAL_BOARD_MONITOR
 // #define HAL_BOARD_CHDTECH_DEV
 
-#if !defined(HAL_BOARD_MOTION) && !defined(HAL_BOARD_CHDTECH_DEV)
+#if !defined(HAL_BOARD_MONITOR) && !defined(HAL_BOARD_CHDTECH_DEV)
 #error "Board type must be defined"
 #endif
 
@@ -46,7 +53,7 @@
 //#define LUMOISITY_PORT 0
 //#define LUMOISITY_PIN 7
 
-#if defined(HAL_BOARD_MOTION)
+#if defined(HAL_BOARD_MONITOR)
 #define POWER_SAVING
 //#define DO_DEBUG_UART
 
@@ -56,6 +63,29 @@
 
 #endif
 
+//Motion
+#define MOTION_PORT 1 
+#define MOTION_PIN  3
+#define MOTION_POWER_PORT 1
+#define MOTION_POWER_PIN  0
+
+//#define EPD2IN9
+//#define EPD2IN9V2
+//#define EPD2IN13V2
+//#define EPD1IN54V2
+//#define EPD3IN7
+
+//spi BME280, EPD
+#define HAL_LCD_MODE_PORT 0 
+#define HAL_LCD_MODE_PIN  0  // EPD DC
+#define HAL_LCD_RESET_PORT 1
+#define HAL_LCD_RESET_PIN  1 // EPD RST
+#define HAL_LCD_CS_PORT 1
+#define HAL_LCD_CS_PIN  2    // BME280 CS
+#define HAL_LCD_CS2_PORT 0
+#define HAL_LCD_CS2_PIN  7   // EPD CS
+#define HAL_LCD_BUSY_PORT 0
+#define HAL_LCD_BUSY_PIN  4  // EPD BUSY
 
 //i2c bh1750
 #define OCM_CLK_PORT 0
@@ -69,7 +99,9 @@
 #ifdef DO_DEBUG_UART
 #define HAL_UART TRUE
 #define HAL_UART_DMA 1
+#ifndef LQI_REQ
 #define INT_HEAP_LEN (2685 - 0x4B - 0xBB)
+#endif
 #endif
 
 #ifdef DO_DEBUG_MT
@@ -97,7 +129,7 @@
 
 
 
-#if defined(HAL_BOARD_MOTION)
+#if defined(HAL_BOARD_MONITOR)
 #define FACTORY_RESET_BY_LONG_PRESS_PORT 0x04 //port2
 
 //#define HAL_KEY_P0_INPUT_PINS BV(0)

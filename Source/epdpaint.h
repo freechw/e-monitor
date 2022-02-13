@@ -23,6 +23,9 @@ extern    int  PaintGetHeight(void);
 extern    void PaintSetHeight(int height);
     int  GetRotate(void);
 extern    void PaintSetRotate(int rotate);
+extern    void PaintSetInvert(int invert);
+
+extern    void PaintDrawImage(const unsigned char* imgData, int x, int y, int Width, int Height, int colored);
 extern    unsigned char* PaintGetImage(void);
 extern    void PaintDrawAbsolutePixel(int x, int y, int colored);
 extern    void PaintDrawPixel(int x, int y, int colored);
@@ -36,10 +39,12 @@ extern    void PaintDrawFilledRectangle(int x0, int y0, int x1, int y1, int colo
 extern    void PaintDrawCircle(int x, int y, int radius, int colored);
 extern    void PaintDrawFilledCircle(int x, int y, int radius, int colored);
 
-//extern    unsigned char* image[896];
-extern    unsigned char* image[672];
+//extern    unsigned char* image[672];
+extern    unsigned char image[768];
+//extern    unsigned char* image[448];
 extern    int pwidth;
 extern    int pheight;
 extern    int protate;
+extern    int pinvert;
 
 #endif

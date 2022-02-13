@@ -1078,7 +1078,7 @@
         </settings>
     </configuration>
     <configuration>
-        <name>DIYRuZ_Motion</name>
+        <name>DIYRuZ_E-Monitor</name>
         <toolchain>
             <name>8051</name>
         </toolchain>
@@ -2168,10 +2168,34 @@
             <name>$PROJ_DIR$\..\Source\bme280spi.h</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\Source\epd1in54v2.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Source\epd1in54v2.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Source\epd2in13v2.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Source\epd2in13v2.h</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\Source\epd2in9.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\Source\epd2in9.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Source\epd2in9v2.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Source\epd2in9v2.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Source\epd3in7.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Source\epd3in7.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\Source\epdpaint.c</name>
@@ -2180,16 +2204,16 @@
             <name>$PROJ_DIR$\..\Source\epdpaint.h</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\Source\epdtest.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Source\epdtest.h</name>
-        </file>
-        <file>
             <name>$PROJ_DIR$\..\Source\font16.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\Source\font24.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Source\font32.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Source\font48.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\Source\font8.c</name>

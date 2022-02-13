@@ -24,20 +24,40 @@
 */
 
 /* LCD Control lines */
+#ifndef HAL_LCD_MODE_POR
 #define HAL_LCD_MODE_PORT 0
+#endif
+#ifndef HAL_LCD_MODE_PIN
 #define HAL_LCD_MODE_PIN  0
+#endif
 
+#ifndef HAL_LCD_RESET_PORT
 #define HAL_LCD_RESET_PORT 1
+#endif
+#ifndef HAL_LCD_RESET_PIN
 #define HAL_LCD_RESET_PIN  1
+#endif
 
+#ifndef HAL_LCD_CS_PORT
 #define HAL_LCD_CS_PORT 1
+#endif
+#ifndef HAL_LCD_CS_PIN
 #define HAL_LCD_CS_PIN  2
+#endif
 
+#ifndef HAL_LCD_CS2_PORT
 #define HAL_LCD_CS2_PORT 0
+#endif
+#ifndef HAL_LCD_CS2_PIN
 #define HAL_LCD_CS2_PIN  7
+#endif
 
+#ifndef HAL_LCD_BUSY_PORT
 #define HAL_LCD_BUSY_PORT 0
+#endif
+#ifndef HAL_LCD_BUSY_PIN
 #define HAL_LCD_BUSY_PIN  4
+#endif
 
 /* LCD SPI lines */
 #define HAL_LCD_CLK_PORT 1
@@ -50,6 +70,7 @@
 #define HAL_LCD_MISO_PIN  7
 
 /* SPI settings */
+
 #define HAL_SPI_CLOCK_POL_LO       0x00 // CPOL 0 0x00, CPOL 1 0x80
 #define HAL_SPI_CLOCK_PHA_0        0x00 // CPHA 0 0x00, CPHA 1 0x40
 #define HAL_SPI_TRANSFER_MSB_FIRST 0x20 // ORDER 0 0x00 LSB first, ORDER 1 0x20 MSB first
@@ -209,8 +230,8 @@ bool BME280Init(void) {
   if (chip != 0x60) {
     LREPMaster("NOT BME280\r\n");
     /* Initialize GPIO */
-    bme_ConfigIOInput();
-    bme_ConfigGP();
+//    bme_ConfigIOInput();
+//    bme_ConfigGP();
     return 0;
   }
   
@@ -288,10 +309,10 @@ void bme_ConfigSPI(void)
 
 void bme_ConfigGP(void)
 {
-  /* Set SPI on UART 1 alternative 2 */
+  /* Reset SPI on UART 1 alternative 2 to GPIO*/
   PERCFG &= ~0x02;
 
-  /* Configure clk, master out and master in lines */
+  /* Configure clk, master out and master in lines to Input*/
   HAL_CONFIG_IO_GP(HAL_LCD_CLK_PORT,  HAL_LCD_CLK_PIN);
   HAL_CONFIG_IO_GP(HAL_LCD_MOSI_PORT, HAL_LCD_MOSI_PIN);
   HAL_CONFIG_IO_GP(HAL_LCD_MISO_PORT, HAL_LCD_MISO_PIN);
